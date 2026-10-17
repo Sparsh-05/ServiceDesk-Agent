@@ -5,7 +5,8 @@ Research prototype for outcome-aware ticket assignment. The first phase is data 
 ## Status
 
 - Operational data: 66,691 tickets in `issues.csv`; 59,916 assignment episodes across 35,665 tickets and 472 agents.
-- Prepared target candidate: elapsed time from final assignment start to resolution, available for 34,773 final-assignment rows with a positive interval.
+- Primary target candidate: observed elapsed time from the **first assignment start** to ticket resolution, with 34,950 valid labels. It reflects the historical assignment sequence, including later reassignment, and is not a counterfactual for alternative agents.
+- Secondary target candidate: 34,773 valid rows measuring elapsed time from the final assignment start to resolution.
 - Text: only 339 of 35,665 history tickets have public text recorded by the first assignment; semantic retrieval is currently a limited-coverage experiment.
 - Missing: a verified operational SLA target/SLA-met label and a documented rubric for Q1/Q2/Q3.
 - Model status: GO for a first structured predictive baseline; NO-GO for claims of SLA-compliance improvement or live availability.
@@ -20,7 +21,7 @@ The audited preparation scripts and derived tables are available in the accompan
 - Features are constructed as-of assignment start; target/outcome columns are kept in a separate table.
 - Agent performance uses only outcomes strictly preceding the assignment timestamp.
 - Workload is a historical overlapping-assignment count, not real-time availability.
-- All rows for the same ticket must remain in the same evaluation split.
+- The primary model uses one first-assignment row per ticket; validation respects chronology and outcome-observation times.
 - Do not equate `Done` with SLA success.
 
 See `research/DATA_READINESS.md`, `research/FEATURE_TARGET_CONTRACT.md`, and `research/BUILD_PLAN.md` for data support, leakage rules, and the planned first baseline.
