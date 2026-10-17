@@ -1,10 +1,14 @@
 # First model build plan
 
-## Target
+## Primary target
 
-Start with `final_assignment_time_to_resolution_log1p_sec`, restricted to rows with a final assignment and a strictly positive `ticket_resolution_date - assignment_start`. The audited data have 34,773 such rows, with a median untransformed time around 7.8 days.
+Start with `first_assignment_time_to_resolution_log1p_sec`, restricted to the first observed assignment episode per ticket and a strictly positive `ticket_resolution_date - assignment_start). The audited data have **34,950** such rows, with an untransformed median of about **8.8 days**.
 
-This target is elapsed time after the final assignment begins—not hands-on effort. It is not SLA compliance and does not by itself identify the causal effect of assigning an alternative agent.
+This predicts observed elapsed time from first assignment start to resolution under the historic assignment sequence, including any later reassignments. It does not measure hands-on effort, and it is not the counterfactual time if a different agent had been assigned.
+
+## Secondary target
+
+`final_assignment_time_to_resolution_log1p_sec` has 34,773 positive final-episode labels, with median around 7.8 days. Keep this separate: it describes time from the final assignment start rather than the first/new-ticket decision.
 
 ## Baselines
 
@@ -16,7 +20,7 @@ This target is elapsed time after the final assignment begins—not hands-on eff
 
 ## Evaluation
 
-- Chronological split by first assignment time; keep tickets grouped.
+- Use chronological cutoffs and one first-assignment row per ticket for the primary target.
 - For retraining simulation, include a training label only if its resolution outcome was known before that simulation's cutoff.
 - Report MAE and median absolute error in hours, plus log-duration metrics.
 - Fit imputers/encoders only on training data.
