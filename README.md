@@ -8,6 +8,7 @@ Research prototype for outcome-aware ticket assignment. The first phase is data 
 - Primary target candidate: observed elapsed time from the **first assignment start** to ticket resolution, with 34,950 valid labels. It reflects the historical assignment sequence, including later reassignment, and is not a counterfactual for alternative agents.
 - Secondary target candidate: 34,773 valid rows measuring elapsed time from the final assignment start to resolution.
 - Text: only 339 of 35,665 history tickets have public text recorded by the first assignment; semantic retrieval is currently a limited-coverage experiment.
+- Initial TF-IDF retrieval baseline: 22.1% Top-1, 27.9% Top-3, and 29.4% Top-5 on 68 chronological holdout tickets; historical majority resolver was 10.3% Top-1. This is exploratory, given text coverage below 1%.
 - Missing: a verified operational SLA target/SLA-met label and a documented rubric for Q1/Q2/Q3.
 - Model status: GO for a first structured predictive baseline; NO-GO for claims of SLA-compliance improvement or live availability.
 
@@ -24,4 +25,4 @@ The audited preparation scripts and derived tables are available in the accompan
 - The primary model uses one first-assignment row per ticket; validation respects chronology and outcome-observation times.
 - Do not equate `Done` with SLA success.
 
-See `research/DATA_READINESS.md`, `research/FEATURE_TARGET_CONTRACT.md`, and `research/BUILD_PLAN.md` for data support, leakage rules, and the planned first baseline.
+See `research/DATA_READINESS.md`, `research/FEATURE_TARGET_CONTRACT.md`, `research/BUILD_PLAN.md`, and `research/RETRIEVAL_BASELINE.md`.
